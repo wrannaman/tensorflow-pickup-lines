@@ -110,12 +110,6 @@ loss_summary = tf.summary.scalar("batch_loss", batchloss)
 acc_summary = tf.summary.scalar("batch_accuracy", accuracy)
 summaries = tf.summary.merge([loss_summary, acc_summary])
 
-# Init Tensorboard stuff. This will save Tensorboard information into a different
-# folder at each run named 'log/<timestamp>/'. Two sets of data are saved so that
-# you can compare training and validation curves visually in Tensorboard.
-timestamp = str(math.trunc(time.time()))
-summary_writer = tf.summary.FileWriter("twitter_log/" + timestamp + "-training")
-validation_writer = tf.summary.FileWriter("twitter_log/" + timestamp + "-validation")
 
 # Init for saving models. They will be saved into a directory named 'checkpoints'.
 # Only the last checkpoint is kept.
@@ -134,6 +128,14 @@ init = tf.global_variables_initializer()
 sess = tf.Session()
 sess.run(init)
 step = 0
+
+# Init Tensorboard stuff. This will save Tensorboard information into a different
+# folder at each run named 'log/<timestamp>/'. Two sets of data are saved so that
+# you can compare training and validation curves visually in Tensorboard.
+timestamp = str(math.trunc(time.time()))
+summary_writer = tf.summary.FileWriter("twitter_log/" + timestamp + "-training", sess.graph)
+validation_writer = tf.summary.FileWriter("twitter_log/" + timestamp + "-validation")
+
 
 # training loop
 for x, y_, epoch in txt.rnn_minibatch_sequencer(codetext, BATCHSIZE, SEQLEN, nb_epochs=EPOCHS):
