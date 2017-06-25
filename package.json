@@ -1,0 +1,25 @@
+{
+  "name": "tensorflow-rnn-shakespeare",
+  "version": "1.0.0",
+  "description": "The presentation itself is available here:",
+  "main": "twitter_data_generator.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/martin-gorner/tensorflow-rnn-shakespeare.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/martin-gorner/tensorflow-rnn-shakespeare/issues"
+  },
+  "homepage": "https://github.com/martin-gorner/tensorflow-rnn-shakespeare#readme",
+  "dependencies": {
+    "fast-csv": "^2.4.0"
+  }
+}
