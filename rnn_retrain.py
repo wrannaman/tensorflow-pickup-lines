@@ -8,14 +8,14 @@ import time
 import math
 tf.set_random_seed(0)
 
-
 # these must match what was saved !
 ALPHASIZE = txt.ALPHASIZE
 NLAYERS = 3
 INTERNALSIZE = 512
 
-# use topn=10 for all but the last one which works with topn=2 for Shakespeare and topn=3 for Python
-author = "twitter_checkpoints/rnn_train_1498231514-72000000"
+##################################### REPLACE THESE WITH YOUR TRAINED MODEL CHECKPOINT FILES #############################
+author = "twitter_checkpoints/rnn_train_1498231514-72000000" # This is the .index file in the checkpoint directory
+META_GRAPH = 'twitter_checkpoints/rnn_train_1498231514-72000000.meta'
 ncnt = 0
 
 
@@ -99,7 +99,7 @@ istate = np.zeros([BATCHSIZE, INTERNALSIZE*NLAYERS])  # initial zero input state
 init = tf.global_variables_initializer()
 
 with tf.Session() as sess:
-    new_saver = tf.train.import_meta_graph('twitter_checkpoints/rnn_train_1498231514-72000000.meta')
+    new_saver = tf.train.import_meta_graph(META_GRAPH)
     new_saver.restore(sess, author)
     step = 0
 
@@ -165,50 +165,3 @@ with tf.Session() as sess:
         # loop state around
         istate = ostate
         step += BATCHSIZE * SEQLEN
-
-
-
-
-#         TITUS ANDRONICUS
-#
-#
-# ACT I
-#
-#
-#
-# SCENE III	An ante-chamber. The COUNT's palace.
-#
-#
-# [Enter CLEOMENES, with the Lord SAY]
-#
-# Chamberlain	Let me see your worshing in my hands.
-#
-# LUCETTA	I am a sign of me, and sorrow sounds it.
-#
-# [Enter CAPULET and LADY MACBETH]
-#
-# What manner of mine is mad, and soon arise?
-#
-# JULIA	What shall by these things were a secret fool,
-# That still shall see me with the best and force?
-#
-# Second Watchman	Ay, but we see them not at home: the strong and fair of thee,
-# The seasons are as safe as the time will be a soul,
-# That works out of this fearful sore of feather
-# To tell her with a storm of something storms
-# That have some men of man is now the subject.
-# What says the story, well say we have said to thee,
-# That shall she not, though that the way of hearts,
-# We have seen his service that we may be sad.
-#
-# [Retains his house]
-# ADRIANA	What says my lord the Duke of Burgons of Tyre?
-#
-# DOMITIUS ENOBARBUS	But, sir, you shall have such a sweet air from the state,
-# There is not so much as you see the store,
-# As if the base should be so foul as you.
-#
-# DOMITIUS ENOY	If I do now, if you were not to seek to say,
-# That you may be a soldier's father for the field.
-#
-# [Exit]
